@@ -6,3 +6,34 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model DockerWordpressProject {
+  id Int @id @default(autoincrement())
+  project_name String @unique
+  wordpress_version String?
+  mysql_version String?
+  mysql_database String?
+  mysql_database_username String?
+  mysql_database_password String?
+  mysql_database_root_password String?
+  base_url String?
+  docker_mysql_port String?
+  docker_wordpress_port String?
+  wordpress_project_directory String?
+}
+
+model TestEnvironment {
+  id Int @id @default(autoincrement())
+  environment_name String @unique
+  environment_description String?
+  test_type String?
+  test_tag String?
+  virtual_projects String?
+}
+
+model TestGroup {
+  id Int @id @default(autoincrement())
+  group_name String
+  test_environment_name String
+  priority_order String
+}
